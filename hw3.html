@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>3D Sierpinski Gasket</title>
+<style>
+input[type="range"] {
+    width: calc(100% - 530px);
+    min-width: 100px;
+}
+canvas {
+    float:left;
+}
+</style>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+attribute vec4 vColor;
+varying vec4 color;
+uniform mat4 mat;
+void
+main()
+{
+    gl_Position = mat * vPosition;
+    color = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+   
+varying vec4 color;
+
+void
+main()
+{
+    gl_FragColor = color;
+}
+</script>
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="hw3.js"></script>
+</head>   
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+<div id="status">&nbsp;</div>
+<h2>Rotation</h2>
+<label for="rot1">Rotation 1: </label>
+<input type="range" min="-180" max="180" value="0" step="any" id="rot1">
+
+<label for="rot2">Rotation 2: </label>
+<input type="range" min="-180" max="180" value="0" step="any" id="rot2">
+
+<label for="rot3">Rotation 3: </label>
+<input type="range" min="-180" max="180" value="0" step="any" id="rot3">
+
+<label for="scale1">Scale: </label>
+<input type="range" min="-2" max="4" value="1" step="any" id="scale1">
+
+<label for="tz">Translation (Z axis): </label>
+<input type="range" min="-1" max="1" value="0" step="any" id="tz">
+
+<button id="addCube">Add cube</button>
+<button id="addTet">Add tetrahedron</button>
+<button id="addTri">Add triangular prism</button>
+<button id="addOcta">Add Octahedron</button>
+
+</body>
+</html>
